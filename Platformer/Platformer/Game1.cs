@@ -24,6 +24,7 @@ namespace Platformer
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         
@@ -43,7 +44,7 @@ namespace Platformer
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            player.Load(Content);
+            player.Load(Content, this);
 
             BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Window,
                 GraphicsDevice,
@@ -80,6 +81,9 @@ namespace Platformer
 
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime);
+
+            camera.Position = player.playerSprite.position - new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
+                graphics.GraphicsDevice.Viewport.Height / 2);
 
             // TODO: Add your update logic here
 
