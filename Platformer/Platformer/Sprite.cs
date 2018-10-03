@@ -32,14 +32,22 @@ namespace Platformer
 
         }
 
-        public void Load(ContentManager content, string asset)
+        public void Load(ContentManager content, string asset, bool useOffset)
         {
             texture = content.Load<Texture2D>(asset);
             width = texture.Bounds.Width;
             height = texture.Bounds.Height;
+
+            if (useOffset == true)
+            {
+                offset = new Vector2(leftEdge + width / 2, topEdge + height / 2);
+            }
+
             UpdateHitBox();
         }
 
+
+    
         public void UpdateHitBox()
         {
             leftEdge = (int)position.X;
@@ -58,8 +66,11 @@ namespace Platformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position + offset, Color.White);
+            spriteBatch.Draw(texture, position - offset, Color.White);
         }
+
+
+
 
     }
 }

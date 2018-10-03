@@ -77,6 +77,8 @@ namespace Platformer
             map = Content.Load<TiledMap>("Level1");
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
+            SetUpTiles();
+
             
         }
 

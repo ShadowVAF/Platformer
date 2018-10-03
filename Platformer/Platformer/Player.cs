@@ -17,6 +17,9 @@ namespace Platformer
         Game1 game = null;
         float runSpeed = 15000;
 
+        Collision collision = new Collision();
+
+
         public Player()
         {
 
@@ -24,10 +27,10 @@ namespace Platformer
 
         public void Load(ContentManager content, Game1 theGame)
         {
-            playerSprite.Load(content, "Tanooki");
+            playerSprite.Load(content, "Tanooki", true);
             game = theGame;
             playerSprite.velocity = Vector2.Zero;
-            playerSprite.position = new Vector2(theGame.GraphicsDevice.Viewport.Width / 2, theGame.GraphicsDevice.Viewport.Height - 100);
+            playerSprite.position = new Vector2(200, 6270);
         }
 
         private void UpdateInput(float deltaTime)
@@ -49,6 +52,17 @@ namespace Platformer
             {
                 localAcceleration.Y = runSpeed;
             }
+
+            foreach (Sprite tile in game.allCollisionTiles)
+            {
+                if (collision. IsColliding(playerSprite, tile) == true)
+                {
+                    int testVariable = 0;
+                }
+            }
+
+
+
             playerSprite.velocity = localAcceleration * deltaTime;
             playerSprite.position += playerSprite.velocity * deltaTime;
 
