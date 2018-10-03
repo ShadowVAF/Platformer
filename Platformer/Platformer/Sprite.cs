@@ -50,10 +50,10 @@ namespace Platformer
     
         public void UpdateHitBox()
         {
-            leftEdge = (int)position.X;
-            rightEdge = (int)position.X + width;
-            topEdge = (int)position.Y;
-            bottomEdge = (int)position.Y + height;
+            leftEdge = (int)position.X - (int)offset.X;
+            rightEdge = leftEdge + width;
+            topEdge = (int)position.Y - (int)offset.Y;
+            bottomEdge = topEdge + height;
         }
 
 
