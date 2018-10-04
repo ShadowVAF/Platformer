@@ -64,3 +64,5 @@ C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x
 C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level1.xnb
 C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Tileset.xnb
 C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Tanooki.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\walk.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\TanookiSprites.xnb

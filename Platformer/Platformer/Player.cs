@@ -28,9 +28,16 @@ namespace Platformer
         public void Load(ContentManager content, Game1 theGame)
         {
             playerSprite.Load(content, "Tanooki", true);
+
+            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
+            animation.Load(content, "TanookiSprites", 12, 20);
+            playerSprite.AddAnimation(animation, 0, -5);
+            playerSprite.Pause();
+
+            playerSprite.offset = new Vector2(24, 24);
             game = theGame;
             playerSprite.velocity = Vector2.Zero;
-            playerSprite.position = new Vector2(200, 6270);
+            playerSprite.position = new Vector2(200, 6270);//200, 6270);
         }
 
         private void UpdateInput(float deltaTime)
@@ -39,10 +46,14 @@ namespace Platformer
             if (Keyboard.GetState().IsKeyDown(Keys.Left) == true || Keyboard.GetState().IsKeyDown(Keys.A) == true)
             {
                 localAcceleration.X = -runSpeed;
+                playerSprite.SetFlipped(true);
+                playerSprite.Play();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right) == true || Keyboard.GetState().IsKeyDown(Keys.D) == true)
             {
                 localAcceleration.X = runSpeed;
+                playerSprite.SetFlipped(false);
+                playerSprite.Play();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up) == true || Keyboard.GetState().IsKeyDown(Keys.W) == true)
             {
@@ -53,13 +64,20 @@ namespace Platformer
                 localAcceleration.Y = runSpeed;
             }
 
-            foreach (Sprite tile in game.allCollisionTiles)
+            if (Keyboard.GetState().IsKeyUp(Keys.Left) == true && Keyboard.GetState().IsKeyUp(Keys.Right) == true &&
+                Keyboard.GetState().IsKeyUp(Keys.A) == true && Keyboard.GetState().IsKeyUp(Keys.D) == true)
             {
-                if (collision. IsColliding(playerSprite, tile) == true)
-                {
-                    int testVariable = 0;
-                }
+                playerSprite.Pause();
             }
+
+
+            //foreach (Sprite tile in game.allCollisionTiles)
+            //{
+            //    if (collision.IsColliding(playerSprite, tile) == true)
+            //    {
+            //        int testVariable = 0;
+            //    }
+            //}
 
 
 
@@ -77,6 +95,7 @@ namespace Platformer
         {
             UpdateInput(deltaTime);
             playerSprite.Update(deltaTime);
+            playerSprite.UpdateHitBox();
         }
         public void Draw(SpriteBatch spriteBatch)
         {

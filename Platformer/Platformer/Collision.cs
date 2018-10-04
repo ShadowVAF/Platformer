@@ -80,7 +80,7 @@ namespace Platformer
             return hero;
         }
 
-        Sprite CollideAbove(Sprite hero, Vector2 titleIndex, Sprite playerPrediction)
+        Sprite CollideAbove(Sprite hero, Vector2 tileIndex, Sprite playerPrediction)
         {
             Sprite tile = game.levelGrid[(int)tileIndex.X, (int)tileIndex.Y];
 
@@ -138,7 +138,7 @@ namespace Platformer
 
         Sprite CollideAboveDiagonals(Sprite hero, Vector2 tileIndex, Sprite playerPrediction)
         {
-            Sprite tile = game.levelGrid(int)tileIndex.X, (int)tileIndex.Y;
+            Sprite tile = game.levelGrid[(int)tileIndex.X, (int)tileIndex.Y];
             int leftEdgeDistance = Math.Abs(tile.rightEdge - playerPrediction.leftEdge);
             int rightEdgeDistance = Math.Abs(tile.leftEdge - playerPrediction.rightEdge);
             int bottomEdgeDistance = Math.Abs(tile.bottomEdge - playerPrediction.topEdge);
@@ -153,9 +153,15 @@ namespace Platformer
                {
 
                     hero.position.X = tile.rightEdge + hero.offset.X;
-                    hero.velocity.X
+                    hero.velocity.X = 0;
                }
+               else
+                {
+                    hero.position.X = tile.leftEdge - hero.width + hero.offset.X;
+                    hero.velocity.X = 0;
+                }
             }
+            return hero;
         }
 
 
@@ -212,7 +218,25 @@ namespace Platformer
                 hero = CollideAbove(hero, topTile, playerPrediction);
             }
 
+            if (leftCheck == false && bottomCheck == false && bottomLeftCheck == true)
+           {
+                hero = CollideBottomDiagonals(hero, bottomLeftTile, playerPrediction);
+           }
 
+            if (rightCheck == false && bottomCheck == false && bottomRightCheck == true)
+            {
+                hero = CollideBottomDiagonals(hero, bottomRightTile, playerPrediction);
+            }
+
+            if (leftCheck == false && topCheck == false && topLeftCheck == true)
+            {
+                hero = CollideAboveDiagonals(hero, topLeftTile, playerPrediction);
+            }
+
+            if (rightCheck == false && topCheck == false && topRightCheck == true)
+            {
+                hero = CollideAboveDiagonals(hero, topRightTile, playerPrediction);
+            }
 
             return hero;
 
