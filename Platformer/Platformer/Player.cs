@@ -30,14 +30,14 @@ namespace Platformer
             playerSprite.Load(content, "Tanooki", true);
 
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "TanookiSprites", 12, 20);
+            animation.Load(content, "TanookiSprites2", 3, 20);
             playerSprite.AddAnimation(animation, 0, -5);
             playerSprite.Pause();
 
             playerSprite.offset = new Vector2(24, 24);
             game = theGame;
             playerSprite.velocity = Vector2.Zero;
-            playerSprite.position = new Vector2(200, 6270);//200, 6270);
+            playerSprite.position = new Vector2(200, 6270);
         }
 
         private void UpdateInput(float deltaTime)

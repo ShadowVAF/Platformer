@@ -67,9 +67,9 @@ namespace Platformer
             player.Load(Content, this);
 
             BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Window,
-                GraphicsDevice,
-                graphics.GraphicsDevice.Viewport.Width,
-                graphics.GraphicsDevice.Viewport.Height);
+                GraphicsDevice, 1280,720);
+                //graphics.GraphicsDevice.Viewport.Width,
+                //graphics.GraphicsDevice.Viewport.Height);
 
             camera = new Camera2D(viewportAdapter);
             camera.Position = new Vector2(0, graphics.GraphicsDevice.Viewport.Height);
