@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,6 +19,9 @@ namespace Platformer
         float runSpeed = 15000;
 
         Collision collision = new Collision();
+
+        //SoundEffect jumpSound;
+        //SoundEffectInstance jumpSoundInstance;
 
         public Player()
         {
@@ -37,6 +41,9 @@ namespace Platformer
             animation.Load(content, "TanookiSprites2", 3, 20);
             playerSprite.AddAnimation(animation, 0, -5);
             playerSprite.Pause();
+
+            //jumpSound = content.Load<SoundEffect>("Jump");
+            //jumpSoundInstance = jumpSound.CreateInstance();
 
             playerSprite.offset = new Vector2(24, 24);
             game = theGame; // We are now able to access the information stored in the 'Game1' class
@@ -72,6 +79,11 @@ namespace Platformer
                 Keyboard.GetState().IsKeyUp(Keys.A) == true && Keyboard.GetState().IsKeyUp(Keys.D) == true)
             {
                 playerSprite.Pause();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
+            {
+                //jumpSoundInstance.Play();
             }
 
             //foreach (Sprite tile in game.allCollisionTiles)

@@ -8,6 +8,7 @@ using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Graphics;
 using MonoGame.Extended.ViewportAdapters;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Platformer
 {
@@ -17,6 +18,9 @@ namespace Platformer
         SpriteBatch spriteBatch;
 
         Player player = new Player(); //Create an instance of our player class
+
+        List<Enemy> enemies = new List<Enemy>();
+        public Chest goal = null;
 
         Camera2D camera = null; //Creates an instance of a 2D camera
         TiledMap map = null; //Creates an instance of a Tiled map
@@ -94,6 +98,7 @@ namespace Platformer
             MediaPlayer.Play(gameMusic);
 
             SetUpTiles();
+            LoadObjects();
         }
 
         protected override void UnloadContent()
@@ -153,6 +158,11 @@ namespace Platformer
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             player.Update(deltaTime); // Call the 'Update' from our Player class.
 
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Update(deltaTime);
+            }
+
             //This makes the camera follow the player's position, it also should center the player to the centr of the camera
             camera.Position = player.playerSprite.position - new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
                                                                             graphics.GraphicsDevice.Viewport.Height / 2);
@@ -178,6 +188,13 @@ namespace Platformer
             mapRenderer.Draw(map, ref viewMatrix, ref projectionMatrix);
             // Call the 'Draw' function from our Player class
             player.Draw(spriteBatch);
+            
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Draw(spriteBatch);
+            }
+            goal.Draw(spriteBatch);
+            
             //Finish drawing
             spriteBatch.End();
 
@@ -196,6 +213,38 @@ namespace Platformer
 
             base.Draw(gameTime);
         }
+
+        void LoadObjects()
+        {
+            foreach (TiledMapObjectLayer layer in map.ObjectLayers)
+            {
+                if (layer.Name == "Enemies")
+                {
+                    foreach (TiledMapObject thing in layer.Objects)
+                    {
+                        Enemy enemy = new Enemy();
+                        Vector2 tiles = new Vector2((int)(thing.Position.X / tileHeight),
+                            (int)(thing.Position.Y / tileHeight));
+                        enemy.enemySprite.position = tiles * tileHeight;
+                        enemy.Load(Content, this);
+                        enemies.Add(enemy);
+                    }
+                }
+                if (layer.Name == "Goal")
+                {
+                    TiledMapObject thing = layer.Objects[0];
+                    if (thing != null)
+                    {
+                        Chest chest = new Chest();
+                        chest.chestSprite.position = new Vector2(thing.Position.X, thing.Position.Y);
+                        chest.Load(Content, this);
+                        goal = chest;
+                    }
+                }
+            }
+        }
+
+
 
         //public float WhereOnMyMap(float maxSize, float positionOfTiles)
         //{
