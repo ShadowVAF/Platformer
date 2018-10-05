@@ -19,7 +19,7 @@ namespace Platformer
 
         Player player = new Player(); //Create an instance of our player class
 
-        List<Enemy> enemies = new List<Enemy>();
+        public List<Enemy> enemies = new List<Enemy>();
         public Chest goal = null;
 
         Camera2D camera = null; //Creates an instance of a 2D camera
@@ -33,6 +33,8 @@ namespace Platformer
         public int tileHeight = 0;
         public int levelTileWidth = 0;
         public int levelTileHeight = 0;
+
+        public Vector2 gravity = new Vector2(0, 1500);
 
         Song gameMusic;
 
@@ -188,12 +190,15 @@ namespace Platformer
             mapRenderer.Draw(map, ref viewMatrix, ref projectionMatrix);
             // Call the 'Draw' function from our Player class
             player.Draw(spriteBatch);
-            
+            goal.Draw(spriteBatch);
+
+
+
             foreach (Enemy enemy in enemies)
             {
                 enemy.Draw(spriteBatch);
             }
-            goal.Draw(spriteBatch);
+            
             
             //Finish drawing
             spriteBatch.End();

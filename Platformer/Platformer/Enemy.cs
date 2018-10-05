@@ -10,9 +10,9 @@ using Microsoft.Xna.Framework;
 
 namespace Platformer
 {
-    class Enemy
+    public class Enemy
     {
-        float walkSpeed = 7500;
+        float walkSpeed = 2500;
         public Sprite enemySprite = new Sprite();
         Collision collision = new Collision();
         Game1 game = null;
@@ -22,7 +22,7 @@ namespace Platformer
             this.game = game;
 
             AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
-            animation.Load(content, "zombie", 4, 5);
+            animation.Load(content, "Link", 1, 5);
 
             enemySprite.AddAnimation(animation, 16, 0);
             enemySprite.width = 64;

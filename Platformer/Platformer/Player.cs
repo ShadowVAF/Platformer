@@ -11,12 +11,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Platformer
 {
-    class Player
+    public class Player
     {
         public Sprite playerSprite = new Sprite();
 
         Game1 game = null;
-        float runSpeed = 15000;
+        float runSpeed = 250;
+        float maxRunSpeed = 500;
+        float friction = 500;
+        float terminalVelocity = 500;
+        public float jumpStrength = 50000;
 
         Collision collision = new Collision();
 
@@ -53,18 +57,31 @@ namespace Platformer
 
         private void UpdateInput(float deltaTime)
         {
-            Vector2 localAcceleration = new Vector2(0, 0);
+            bool wasMovingLeft = playerSprite.velocity.X < 0;
+            bool wasMovingRight = playerSprite.velocity.X > 0;
+
+            Vector2 localAcceleration = game.gravity;
             if (Keyboard.GetState().IsKeyDown(Keys.Left) == true || Keyboard.GetState().IsKeyDown(Keys.A) == true)
             {
                 localAcceleration.X = -runSpeed;
                 playerSprite.SetFlipped(true);
                 playerSprite.Play();
             }
+            else if (wasMovingLeft == true)
+            {
+                localAcceleration.X += friction;
+                playerSprite.Pause();
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.Right) == true || Keyboard.GetState().IsKeyDown(Keys.D) == true)
             {
                 localAcceleration.X = runSpeed;
                 playerSprite.SetFlipped(false);
                 playerSprite.Play();
+            }
+            else if (wasMovingRight == true)
+            {
+                localAcceleration.X += -friction;
+                playerSprite.Pause();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up) == true || Keyboard.GetState().IsKeyDown(Keys.W) == true)
             {
@@ -81,9 +98,12 @@ namespace Platformer
                 playerSprite.Pause();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true && playerSprite.canJump == true)
             {
-                //jumpSoundInstance.Play();
+                playerSprite.canJump = false;
+                localAcceleration.Y -= jumpStrength;
+                
+                //jumpSoundInstance
             }
 
             //foreach (Sprite tile in game.allCollisionTiles)
@@ -95,11 +115,31 @@ namespace Platformer
             //}
 
 
-            playerSprite.velocity = localAcceleration * deltaTime;
+            playerSprite.velocity += localAcceleration * deltaTime;
+
+            if (playerSprite.velocity.X > maxRunSpeed)
+            {
+                playerSprite.velocity.X = maxRunSpeed;
+            }
+            else if (playerSprite.velocity.X < -maxRunSpeed)
+            {
+                playerSprite.velocity.X = -maxRunSpeed;
+            }
+            if (wasMovingLeft && (playerSprite.velocity.X > 0) || wasMovingRight && (playerSprite.velocity.X < 0))
+            {
+                playerSprite.velocity.X = 0;
+            }
+
+            if (playerSprite.velocity.Y > terminalVelocity)
+            {
+                playerSprite.velocity.Y = terminalVelocity;
+            }
+
             playerSprite.position += playerSprite.velocity * deltaTime;
 
             collision.game = game;
             playerSprite = collision.CollideWithPlatforms(playerSprite, deltaTime);
+
 
         }
 
@@ -110,7 +150,17 @@ namespace Platformer
             UpdateInput(deltaTime);
             playerSprite.Update(deltaTime);
             playerSprite.UpdateHitBox();
+            
+            if (collision.IsColliding(playerSprite, game.goal.chestSprite))
+            {
+                game.Exit();
+            }
+            for (int i = 0; i < game.enemies.Count; i++)
+            {
+                playerSprite = collision.CollideWithMonster(this, game.enemies[i], deltaTime, game);
+            }
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             playerSprite.Draw(spriteBatch);
