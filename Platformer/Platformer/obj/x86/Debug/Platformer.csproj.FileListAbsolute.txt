@@ -67,3 +67,13 @@ C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x
 C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\walk.xnb
 C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\TanookiSprites.xnb
 C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\TanookiSprites2.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Level2.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\heart.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Background.wma
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Background.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Collect.wma
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Collect.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Death.wma
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Death.xnb
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Jump.wma
+C:\Users\s182209\Documents\GitHub\Platformer\Platformer\Platformer\bin\Windows\x86\Debug\Content\Jump.xnb

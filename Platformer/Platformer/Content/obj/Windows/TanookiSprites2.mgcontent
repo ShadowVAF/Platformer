@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/s182209/Documents/GitHub/Platformer/Platformer/Platformer/Content/TanookiSprites2.png</SourceFile>
-  <SourceTime>2018-10-04T12:25:19.1177565+10:00</SourceTime>
+  <SourceTime>2018-10-05T10:36:46.720782+10:00</SourceTime>
   <DestFile>C:/Users/s182209/Documents/GitHub/Platformer/Platformer/Platformer/Content/bin/Windows/TanookiSprites2.xnb</DestFile>
-  <DestTime>2018-10-04T12:26:21.8557565+10:00</DestTime>
+  <DestTime>2018-10-05T10:48:48.187782+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-02T02:05:36+11:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
